@@ -1,5 +1,6 @@
 var router = require('express').Router();
 const axios = require("axios");
+var morgan = require('morgan')
 var mysql      = require('mysql');
 const {Prohairesis} = require('prohairesis')
 const env = require('../env')
@@ -15,10 +16,10 @@ router.get('/', async (req, res) => {
 
     database
     .query(`SELECT * FROM yanksk_pw_drugs`)
-    .then((res) => {
-      console.log(res);
-      res.send(res);
-    })
+    .then((response) => {
+      console.log(response);
+      // const jsonResponse = JSON.stringify(response);
+      res.send(response);    })
     .catch((e) => {
       console.error(e)
     })
