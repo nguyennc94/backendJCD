@@ -15,7 +15,7 @@ router.get('/name/:name', async (req, res) => {
     const database = new Prohairesis(env.CLEARDB_DATABASE_URL);
 
     database
-    .query(`SELECT * FROM yanksk_pw_drugs  WHERE LOWER(name) LIKE LOWER('%${req.params.name}%')`)
+    .query(`SELECT * FROM yanksk_pw_drugs  WHERE LOWER(name) LIKE LOWER('${req.params.name}%')`)
     .then((response) => {
       console.log(response);
       // const jsonResponse = JSON.stringify(response);
