@@ -23,9 +23,9 @@ router.get('/name/:name', async (req, res) => {
     .catch((e) => {
       console.error(e)
     })
-    .finally(() =>{
-      database.close();
-    })
+    // .finally(() =>{
+    //   database.close();
+    // })
   });
 
 
