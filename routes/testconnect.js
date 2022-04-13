@@ -1,6 +1,8 @@
 var router = require('express').Router();
 const axios = require("axios");
 var mysql      = require('mysql');
+const {Prohairesis} = require('prohairesis')
+const env = require('../env')
 
 router.get('/', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -9,28 +11,19 @@ router.get('/', async (req, res) => {
       "Origin, X-Requested-With, Content-Type, Accept"
     );
 
-    const db = mysql.createConnection({
-      host:'162.241.252.86',
-      port: '3306',
-      user:"bhfiblmy_nguyen",
-      database :'bhfiblmy_nguyentest',
-      password:'Health4Ever!'
-    })
+    const database = new Prohairesis(env.CLEARDB_DATABASE_URL);
 
-    db.connect(err => {
-      if(err){
-        throw err
-      }
-      console.log("Connected")
+    database
+    .query(`SELECT * FROM yanksk_pw_drugs`)
+    .then((res) => {
+      console.log(res);
+      res.send(res);
     })
-
-    let sql = `SELECT * FROM YAnkSk_pw_drugs`
-    let query = db.query(sql,(err,result)=> {
-      if(err){
-        throw err
-      }
-      console.log(result)
-      res.send(result)
+    .catch((e) => {
+      console.error(e)
+    })
+    .finally(() =>{
+      database.close();
     })
   });
 
