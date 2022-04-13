@@ -51,7 +51,7 @@ app.use('/callcatalog', require('./routes/callcatalogserver'));
 app.use('/getpatientpackage', require('./routes/getpatientpackageorderserver'));
 app.use('/sendresetemail', require('./routes/sendresetpassword'));
 app.use('/welcomeregister', require('./routes/welcomeregister'));
-app.use('/testconnect', require('./routes/testconnect'));
+app.use('/selectdrug', require('./routes/selectdrug'));
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
