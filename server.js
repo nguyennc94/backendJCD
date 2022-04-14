@@ -52,7 +52,7 @@ app.use('/getpatientpackage', require('./routes/getpatientpackageorderserver'));
 app.use('/sendresetemail', require('./routes/sendresetpassword'));
 app.use('/welcomeregister', require('./routes/welcomeregister'));
 app.use('/selectdrug', require('./routes/selectdrug'));
-app.use('/selecthash', require('./routes/selecthash'));
+app.use('/findhash', require('./routes/findhash'));
 app.use('/selectproduct', require('./routes/selectproduct'));
 
 app.listen(PORT, () => {
