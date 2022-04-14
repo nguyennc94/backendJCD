@@ -3,7 +3,7 @@ var mysql      = require('mysql');
 const {Prohairesis} = require('prohairesis')
 const env = require('../env')
 
-router.get('/id/:id', async (req, res) => {
+router.get('/hash/:hash', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
@@ -13,7 +13,11 @@ router.get('/id/:id', async (req, res) => {
     const database = new Prohairesis(env.CLEARDB_DATABASE_URL);
 
     database
-    .query(`SELECT * FROM yanksk_pw_drug_ingredient  WHERE LOWER(ingredient_id) LIKE LOWER('${req.params.id}')`)
+    .query(`
+      SELECT 	drug_id ,ingredient_hash,name
+      FROM YAnkSk_pw_drugs
+      WHERE LOWER(YAnkSk_pw_drugs.ingredient_hash) LIKE LOWER('${req.params.hash}')
+    `)
     .then((response) => {
       console.log(response);
       // const jsonResponse = JSON.stringify(response);

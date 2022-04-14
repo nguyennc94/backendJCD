@@ -3,7 +3,7 @@ var mysql      = require('mysql');
 const {Prohairesis} = require('prohairesis')
 const env = require('../env')
 
-router.get('/name/:name', async (req, res) => {
+router.get('/hash/:hash', async (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Headers",
@@ -13,14 +13,11 @@ router.get('/name/:name', async (req, res) => {
     const database = new Prohairesis(env.CLEARDB_DATABASE_URL);
 
     database
-    .query(`
-      SELECT YAnkSk_pw_drugs.drug_id, YAnkSk_pw_drugs.name, YAnkSk_pw_ingredients.ingredient_id, YAnkSk_pw_ingredients.ingredient_name
-      FROM YAnkSk_pw_drugs
-      JOIN YAnkSk_pw_drug_ingredient ON YAnkSk_pw_drugs.drug_id = YAnkSk_pw_drug_ingredient.drug_id
-      JOIN YAnkSk_pw_ingredients ON YAnkSk_pw_drug_ingredient.ingredient_id = YAnkSk_pw_ingredients.ingredient_id
-      WHERE LOWER(YAnkSk_pw_drugs.name) LIKE LOWER('${req.params.name}%')
-      OR LOWER(YAnkSk_pw_ingredients.ingredient_name) LIKE LOWER('%${req.params.name}%')
-    `)
+    .query(`SELECT *
+    FROM YAnkSk_pw_packages_tierprice
+    WHERE YAnkSk_pw_packages_tierprice.package_id IN
+    (SELECT YAnkSk_pw_packages.package_id FROM YAnkSk_pw_packages
+    WHERE YAnkSk_pw_packages.drug_id IN (SELECT YAnkSk_pw_drugs.drug_id FROM YAnkSk_pw_drugs WHERE YAnkSk_pw_drugs.ingredient_hash = '${req.params.hash}'`)
     .then((response) => {
       console.log(response);
       // const jsonResponse = JSON.stringify(response);
