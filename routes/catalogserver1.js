@@ -32,9 +32,9 @@ router.get('/', async (req, res) => {
 
       const response = await axios.post("https://jpp.pharmacywire.com/momex/NavCode/xmlconnect",body);
       const a = response.data
-      console.log(response)
+      console.log(a)
       const jsonResponse = JSON.stringify(a);
-      res.send(jsonResponse);
+      res.send(a);
   });
 
 

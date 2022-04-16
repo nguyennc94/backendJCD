@@ -54,6 +54,7 @@ app.use('/welcomeregister', require('./routes/welcomeregister'));
 app.use('/selectdrug', require('./routes/selectdrug'));
 app.use('/findhash', require('./routes/findhash'));
 app.use('/selectproduct', require('./routes/selectproduct'));
+app.use('/selecthash', require('./routes/selecthash'));
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
