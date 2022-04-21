@@ -51,10 +51,12 @@ app.use('/callcatalog', require('./routes/callcatalogserver'));
 app.use('/getpatientpackage', require('./routes/getpatientpackageorderserver'));
 app.use('/sendresetemail', require('./routes/sendresetpassword'));
 app.use('/welcomeregister', require('./routes/welcomeregister'));
-app.use('/selectdrug', require('./routes/selectdrug'));
+app.use('/selectdrug', require('./routes/selectdruginsearch'));
 app.use('/findhash', require('./routes/findhash'));
 app.use('/selectproduct', require('./routes/selectproduct'));
-app.use('/selecthash', require('./routes/selecthash'));
+app.use('/calldrugtable', require('./routes/calldrugtable'));
+app.use('/callingredienttable', require('./routes/callingredienttable'));
+app.use('/calltirepricetable', require('./routes/calltirepricetable'));
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);

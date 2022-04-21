@@ -20,7 +20,8 @@ router.get('/hash/:hash', async (req, res) => {
     .then((response) => {
       console.log(response);
       // const jsonResponse = JSON.stringify(response);
-      res.send(response);    })
+      res.send(response);
+    })
     .catch((e) => {
       console.error(e)
     })
